@@ -18,9 +18,9 @@
 
 library(tidyverse)
 
-gaminder <- read_csv("data/gapminder_data.csv")
+gapminder <- read_csv("data/gapminder_data.csv")
 
-gapminder_1977 <- filter(gaminder, year==1977)
+gapminder_1977 <- filter(gapminder, year==1977)
 gapminder_1977
 
 # ggplot() function
@@ -90,3 +90,39 @@ ggplot(gapminder_1977, aes(x = gdpPercap, y = lifeExp)) +
 ggplot(gapminder_1977, aes(x = gdpPercap, y = lifeExp)) +
   geom_point(colour = "red", size = 2, alpha=3, shape=2) +scale_x_log10()
 
+# challenge 7 - scatter plot showing how life expectancy 
+# has changed over time
+ggplot(data = gapminder, mapping = aes(x = year, y = lifeExp)) + geom_point()
+
+# visualising the data as a line graph
+ggplot(data= gapminder, aes(x = year,
+      y = lifeExp, group=country, 
+      colour= continent)) +
+      geom_line()
+
+# visualising the data as a line graph also with points 
+# or adding another layer
+ggplot(data= gapminder, aes(x = year,
+       y = lifeExp, group=country, 
+      colour= continent)) +
+      geom_line()+geom_point()
+
+# challenge 8
+
+# visualising the data as a line graph also with points (with only 
+# drawing the lines in colour) 
+# and plotting the points on top of line (by the order from lines to points))
+
+ggplot(data = gapminder, aes(x = year, y = lifeExp, group=country))+ 
+      geom_line(mapping = aes(colour=continent))+
+      geom_point()
+#or
+
+ggplot(data = gapminder, aes(x = year, y = lifeExp, group=country))+ 
+  geom_line(mapping = aes(colour=continent))+
+  geom_point(colour="black")
+
+# the following will push the points layer back and bring up the line layer on top
+ggplot(data = gapminder, aes(x = year, y = lifeExp, group=country))+ 
+  geom_point(colour="black")+ 
+  geom_line(mapping = aes(colour=continent))
