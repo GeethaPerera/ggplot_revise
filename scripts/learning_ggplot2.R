@@ -40,9 +40,16 @@ ggplot(data=gapminder_1977,
 #the geometry to which these aesthetics can be applied
 
 ggplot(data=gapminder_1977, 
-       mapping = aes(x=gdpPercap, y=lifeExp, 
-                     colour=continent, size=pop)
+       mapping = aes(x=gdpPercap, 
+       y=lifeExp,colour=continent, size=pop)
        )+geom_point()
+
+# another way of writing the same command
+
+ggplot(gapminder_1977,
+       aes(x=gdpPercap, y=lifeExp, 
+      colour=continent, size=pop)
+      )+geom_point()
 
 # to add the log scale to x axis
 
@@ -51,5 +58,35 @@ ggplot(data=gapminder_1977,
                      colour=continent, size=pop)
 )+geom_point()+scale_x_log10()
 
+# challenge 4
 
+ggplot(data=gapminder_1977, 
+       mapping = aes(x=pop, y=lifeExp, 
+                     colour=continent, size=gdpPercap)
+)+geom_point()+scale_x_log10()
+
+# mapping can be defined for each geom function seperately
+
+ggplot(
+  data=gapminder_1977
+) + geom_point( mapping = aes(x=gdpPercap, y=lifeExp, 
+                     colour=continent, size=pop))
+
+# challenge 5
+
+# aesthetics that can be mapped to a geom -> by searching 
+# geom and find under Aesthetics
+# e.g. for geom_point( ) understands the following aesthetics
+# x, y, alpha, colour, fill, group, shape, size, stroke
+
+# setting the value of an aesthetic directly 
+# by assigning it outside of the aes() function
+
+ggplot(gapminder_1977, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(colour = "blue", size = 5) +scale_x_log10()
+
+# challenge 6
+
+ggplot(gapminder_1977, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(colour = "red", size = 2, alpha=3, shape=2) +scale_x_log10()
 
