@@ -14,6 +14,8 @@
 
 # coordinate system - Cartesian coordinate system
 
+# challenge 2
+
 library(tidyverse)
 
 gaminder <- read_csv("data/gapminder_data.csv")
@@ -41,3 +43,13 @@ ggplot(data=gapminder_1977,
        mapping = aes(x=gdpPercap, y=lifeExp, 
                      colour=continent, size=pop)
        )+geom_point()
+
+# to add the log scale to x axis
+
+ggplot(data=gapminder_1977, 
+       mapping = aes(x=gdpPercap, y=lifeExp, 
+                     colour=continent, size=pop)
+)+geom_point()+scale_x_log10()
+
+
+
