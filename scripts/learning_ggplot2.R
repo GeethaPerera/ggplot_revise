@@ -126,3 +126,75 @@ ggplot(data = gapminder, aes(x = year, y = lifeExp, group=country))+
 ggplot(data = gapminder, aes(x = year, y = lifeExp, group=country))+ 
   geom_point(colour="black")+ 
   geom_line(mapping = aes(colour=continent))
+
+# Transformations and statistics
+
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))+
+  geom_point()
+
+# can modify the transperancy of points (setting the aesthetic outside the aes( )
+# function - apply to all the points)
+
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))+
+  geom_point(alpha=0.5)
+
+# mapping alpha to a variable in the data (e.g. contienent)
+
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))+
+  geom_point(aes(alpha=continent))
+
+# to transform the scale of x axis to log 
+
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))+
+  geom_point(alpha=0.5)+scale_x_log10()
+
+# fitting a simple relationship to the data by adding another layer 
+
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))+
+  geom_point(alpha=0.5)+scale_x_log10()+
+geom_smooth(method = "lm")
+
+# make the line thicker (done outside the aes of the main plot)
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))+
+  geom_point(alpha=0.5)+scale_x_log10()+
+  geom_smooth(method = "lm", size = 1.5)
+
+# Challenge 9 - modifying the size and colour of the 
+# points layer without adding it to the ase()function
+
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))+
+  geom_point(alpha=3, colour="orange")+scale_x_log10()+
+  geom_smooth(method = "lm")
+
+# Challenge 10 - modifying the shape and colour of the points (coloured by continent)
+# with new trend lines (shape = solid triangles)
+
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp, colour=continent))+
+  geom_point(size=1.5, shape=17)+scale_x_log10()+
+  geom_smooth(method = "lm", size=1.5)
+
+# adding a colour scale manually
+
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp, color = continent)) +
+  geom_point() + 
+  scale_x_log10() +
+  scale_colour_manual(values = c("red", "green", "blue", "purple", "black"))
+
+# Challenge 11
+
+colours() # to see a list of colours that R uses
+
+# modifying the plots by changing colours using the one that R uses
+
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp, color = continent)) +
+  geom_point() + 
+  scale_x_log10() +
+  scale_colour_manual(values = c("649", "29", "35", "543", "44"))
+
+# modifying the plots by changing colours using ColorBrewer 
+# (search google to find out the pallette names)
+
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp, color = continent)) +
+  geom_point() + 
+  scale_x_log10() +
+  scale_color_brewer(palette = "Set1")
