@@ -228,3 +228,138 @@ ggplot(
   ) + geom_density(alpha=0.6) +
   scale_x_log10()+
   facet_wrap ( ~ year)
+
+# Challenge 14 - Exploring blackman.wheat data set
+
+install.packages("agridat")
+
+library(agridat)
+blackman.wheat 
+view(blackman.wheat)
+
+ggplot(data = blackman.wheat, mapping = aes(x=nitro, y=yield, colour=loc))+geom_point()+facet_wrap ( ~ gen)
+
+ggplot(data = blackman.wheat, mapping = aes(x=loc, y=yield, colour=nitro))+geom_point()+facet_wrap ( ~ gen)
+
+ggplot(data = blackman.wheat, mapping = aes(x=gen, y=yield, colour=nitro))+geom_point()+facet_wrap ( ~ loc)
+
+# additional work by adding plot title, axis title, and legend etc
+
+final_plot <- ggplot(data = blackman.wheat, mapping = aes(x=gen, y=yield, colour=nitro))+geom_point()+facet_wrap ( ~ loc)
+
+final_plot+labs(
+  title = "Effect of fertiliser treatment", # main title of the figure
+  x = "genotype", # x axis title
+  y= "yield", # y axis title
+  colour = "nitrogen level")
+
+# additional work by changing font sizes etc
+final_plot+labs(
+  title = "Effect of fertiliser treatment", # main title of the figure
+  x = "genotype", # x axis title
+  y= "yield", # y axis title
+  colour = "nitrogen level"
+  ) + theme_bw()+
+  theme(axis.text = element_text(size = 4),
+        axis.title = element_text(size = 8),
+        legend.text = element_text(size = 5),
+        legend.title = element_text(size = 8),
+        plot.title = element_text(size = 10))
+
+a_countires <- filter(gapminder, str_starts(country,"A"))
+a_countires
+
+
+rough_plot <- 
+  rough_plot <- ggplot(data=a_countires, aes(x= year, y = lifeExp, colour=continent))+
+  geom_line()+
+  facet_wrap(~country)
+
+rough_plot+labs(
+  title = "Figure 1", # main title of the figure
+  x = "Year", # x axis title
+  y= "Life expectancy", # y axis title
+  colour = "continent") # title of the legend
+
+#change the title to make sense
+
+rough_plot+labs(
+  title = "Change of life expectancy over time", 
+  x = "Year", 
+  y= "Life expectancy", 
+  colour = "continent",
+  caption = "Data source - gapminder") 
+
+# Modifying looks (the default theme - theme_grey)
+
+# theme_bw 
+
+rough_plot +
+  labs(
+  title = "Change of life expectancy over time", 
+  x = "Year", 
+  y= "Life expectancy", 
+  colour = "continent",
+  caption = "Data source - gapminder"
+  )+
+  theme_bw()
+
+# theme_linedraw
+
+rough_plot +
+  labs(
+    title = "Change of life expectancy over time", 
+    x = "Year", 
+    y= "Life expectancy", 
+    colour = "continent",
+    caption = "Data source - gapminder"
+  )+
+  theme_linedraw()
+
+#theme_minimal
+
+rough_plot +
+  labs(
+    title = "Change of life expectancy over time", 
+    x = "Year", 
+    y= "Life expectancy", 
+    colour = "continent",
+    caption = "Data source - gapminder"
+  )+
+  theme_minimal()
+
+# modifying individual elements using theme
+
+rough_plot +
+  labs(
+    title = "Change of life expectancy over time", 
+    x = "Year", 
+    y= "Life expectancy", 
+    colour = "continent",
+    caption = "Data source - gapminder"
+  )+theme_bw() +
+theme(panel.grid.minor = element_blank(),
+      plot.title = element_text(face = "bold"))
+
+rough_plot +
+  labs(
+    title = "Change of life expectancy over time", 
+    x = "Year", 
+    y= "Life expectancy", 
+    colour = "continent",
+    caption = "Data source - gapminder"
+  )+theme_bw() +
+  theme(axis.text = element_text(size = 5)) 
+rough_plot +
+  labs(
+    title = "Change of life expectancy over time", 
+    x = "Year", 
+    y= "Life expectancy", 
+    colour = "continent",
+    caption = "Data source - gapminder"
+  )+theme_bw() +
+  theme(axis.text = element_text(size = 5),
+        axis.title = element_text(size = 8),
+        legend.text = element_text(size = 5),
+        legend.title = element_text(size = 8),
+        plot.title = element_text(size = 10)) 
