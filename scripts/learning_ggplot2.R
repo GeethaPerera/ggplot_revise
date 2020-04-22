@@ -198,3 +198,24 @@ ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp, color = conti
   geom_point() + 
   scale_x_log10() +
   scale_color_brewer(palette = "Set1")
+
+# seperating figures (adding facet_wrap() as a layer)
+# prepare seperate figures for country names starting with 'A'
+
+a_countires <- filter(gapminder, str_starts(country,"A"))
+a_countires
+
+ggplot(data=a_countires,mapping = aes(x= year, y = lifeExp, colour=continent))+
+  geom_line()+
+  facet_wrap(~country)
+
+# Challenge 12 (gapminder data change through time)
+
+ggplot(
+  data = gapminder, 
+  mapping = aes(x = gdpPercap, y = lifeExp, colour = continent, size = pop)
+  )+
+  geom_point() +
+  scale_x_log10()+
+  facet_wrap ( ~ year)
+
