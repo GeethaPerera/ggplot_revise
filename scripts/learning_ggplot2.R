@@ -266,6 +266,8 @@ final_plot+labs(
         legend.title = element_text(size = 8),
         plot.title = element_text(size = 10))
 
+# Preparing plots for display
+
 a_countires <- filter(gapminder, str_starts(country,"A"))
 a_countires
 
@@ -341,6 +343,9 @@ rough_plot +
 theme(panel.grid.minor = element_blank(),
       plot.title = element_text(face = "bold"))
 
+# Challenge 2
+
+# to remove gray boxes behind the country names
 rough_plot +
   labs(
     title = "Change of life expectancy over time", 
@@ -349,7 +354,43 @@ rough_plot +
     colour = "continent",
     caption = "Data source - gapminder"
   )+theme_bw() +
-  theme(axis.text = element_text(size = 5)) 
+  theme(strip.background = element_blank())
+
+# to increase the size of major grid lines to 1
+
+rough_plot +
+  labs(
+    title = "Change of life expectancy over time", 
+    x = "Year", 
+    y= "Life expectancy", 
+    colour = "continent",
+    caption = "Data source - gapminder"
+  )+theme_bw() +
+  theme(panel.grid.minor = element_line(1))
+
+# to change axis titles to be shrunk to size 10 and coloured blue
+
+rough_plot +
+  labs(
+    title = "Change of life expectancy over time", 
+    x = "Year", 
+    y= "Life expectancy", 
+    colour = "continent",
+    caption = "Data source - gapminder"
+  )+theme_bw() +
+  theme(axis.title = element_text(size = 10, color = "blue")) 
+
+# position the legend at the bottom of the plot
+rough_plot +
+  labs(
+    title = "Change of life expectancy over time", 
+    x = "Year", 
+    y= "Life expectancy", 
+    colour = "continent",
+    caption = "Data source - gapminder"
+  ) + theme_bw() +
+theme(axis.title = element_text(size = 10, color = "blue"), legend.position = "bottom")
+
 rough_plot +
   labs(
     title = "Change of life expectancy over time", 
@@ -363,3 +404,5 @@ rough_plot +
         legend.text = element_text(size = 5),
         legend.title = element_text(size = 8),
         plot.title = element_text(size = 10)) 
+
+
