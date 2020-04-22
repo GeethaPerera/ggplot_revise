@@ -219,3 +219,12 @@ ggplot(
   scale_x_log10()+
   facet_wrap ( ~ year)
 
+#  Challenge 13 - creating a density plot 
+# by filling with continent and separating by year
+
+ggplot(
+  data = gapminder, 
+  mapping = aes(x = pop, fill = continent)
+  ) + geom_density(alpha=0.6) +
+  scale_x_log10()+
+  facet_wrap ( ~ year)
