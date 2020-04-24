@@ -417,5 +417,61 @@ rough_plot +
         strip.text = element_text(size =5),
         legend.position = "bottom")
 
+# Exporting the plot using ggsave
+# 1. assigned the final plot a name 
 
+LifeExp_plot <- rough_plot +
+  labs(
+    title = "Change of life expectancy over time", 
+    x = "Year", 
+    y= "Life expectancy", 
+    colour = "continent",
+    caption = "Data source - gapminder"
+  )+theme_bw() +
+  theme(axis.text = element_text(size = 4),
+        axis.title = element_text(size = 6,),
+        legend.text = element_text(size = 4),
+        legend.title = element_text(size = 6),
+        plot.title = element_text(size = 8),
+        strip.text = element_text(size =5),
+        legend.position = "bottom")
 
+LifeExp_plot
+
+# 2. saving the final plot in an appropriate folder
+
+ggsave(filename = "results/LifeExp.png", plot = LifeExp_plot, width = 12, height = 10, dpi = 300, units = "cm")
+
+ggsave(filename = "results/LifeExp.pdf", plot = LifeExp_plot, width = 12, height = 10, dpi = 300, units = "cm")
+
+# multi_panel figures
+
+library(cowplot)
+
+# making some plots
+
+plot1 <- ggplot(gapminder, aes(x=gdpPercap, y=lifeExp))+ geom_point()
+plot1
+
+plot2 <- ggplot(gapminder, aes(x=continent, y=lifeExp))+geom_boxplot()
+plot2
+
+plot3 <- ggplot(gapminder, aes(x=gdpPercap, y=pop))+geom_point()
+plot3
+
+plot4 <- ggplot(gapminder, aes(x=lifeExp, y=pop))+geom_point()
+plot4
+
+# combining the plots into one using plot_grid( )
+
+plot_grid(plot1, plot2, plot3, plot4)
+
+# changing the size of the panel of plots
+
+plot_grid(plot1, plot2, plot3, plot4, rel_heights = c(1,3))
+plot_grid(plot1, plot2, plot3, plot4, rel_heights = c(6,8))
+
+#labelling the figures using label ( )
+
+plot_grid(plot1, plot2, plot3, plot4, labels = "AUTO")
+plot_grid(plot1, plot2, plot3, plot4, labels = "auto")
