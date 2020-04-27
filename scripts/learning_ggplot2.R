@@ -234,9 +234,8 @@ ggplot(
 install.packages("agridat")
 
 library(agridat)
-blackman.wheat 
-view(blackman.wheat)
-
+blackman.wheat
+library(tidyverse)
 ggplot(data = blackman.wheat, mapping = aes(x=nitro, y=yield, colour=loc))+geom_point()+facet_wrap ( ~ gen)
 
 ggplot(data = blackman.wheat, mapping = aes(x=loc, y=yield, colour=nitro))+geom_point()+facet_wrap ( ~ gen)
@@ -245,8 +244,9 @@ ggplot(data = blackman.wheat, mapping = aes(x=gen, y=yield, colour=nitro))+geom_
 
 # additional work by adding plot title, axis title, and legend etc
 
-final_plot <- ggplot(data = blackman.wheat, mapping = aes(x=gen, y=yield, colour=nitro))+geom_point()+facet_wrap ( ~ loc)
+final_plot <- ggplot(data = blackman.wheat, mapping = aes(x=gen, y=yield, colour=nitro, shape=type))+geom_point()+facet_wrap ( ~ loc)
 
+final_plot
 final_plot+labs(
   title = "Effect of fertiliser treatment", # main title of the figure
   x = "genotype", # x axis title
@@ -254,7 +254,7 @@ final_plot+labs(
   colour = "nitrogen level")
 
 # additional work by changing font sizes etc
-final_plot+labs(
+fertilizer_effect <- final_plot+labs(
   title = "Effect of fertiliser treatment", # main title of the figure
   x = "genotype", # x axis title
   y= "yield", # y axis title
@@ -262,9 +262,13 @@ final_plot+labs(
   ) + theme_bw()+
   theme(axis.text = element_text(size = 4),
         axis.title = element_text(size = 8),
-        legend.text = element_text(size = 5),
+        legend.text = element_text(size = 6),
         legend.title = element_text(size = 8),
-        plot.title = element_text(size = 10))
+        plot.title = element_text(size = 10))+
+       scale_colour_manual(values = c("red", "blue"))
+
+fertilizer_effect
+ggsave(filename ="results/blackman.wheat.png", plot = fertilizer_effect,width = 15, height = 10, dpi = 300, units = "cm")
 
 # Preparing plots for display
 
